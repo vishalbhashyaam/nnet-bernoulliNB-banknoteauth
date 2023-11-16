@@ -8,7 +8,7 @@ from sklearn.metrics import log_loss
 def error_calc(ypred,ytrue):
         sq_err = 0
         for i in range(len(ypred)):
-            sq_err = ytrue[i]*np.log(ypred[i]) + (1-ytrue[i])*np.log(1-ypred[i]) 
+            sq_err += (ytrue[i]*np.log(ypred[i])) + (1-ytrue[i])*np.log(1-ypred[i]) 
         
         
             return sq_err/len(ypred)
@@ -77,7 +77,7 @@ class net:
 
             
         
-        return pred_cat
+        return y_out
 
 
 if __name__ == "__main__":
@@ -99,8 +99,10 @@ if __name__ == "__main__":
     # Prediction for a step of the process 
     prediction = nnet.feed_forward()
     
-   
+    #  error with log loss from scratch 
 
+   
+    print(error_calc(prediction,target))
     
     
     print("Squared error for network = ",log_loss(target,prediction))
